@@ -1,0 +1,33 @@
+PARADIGM TABLE
+
+| Feature            | LOW MWL                                   | HIGH MWL                                    |
+| -------------------| ----------------------------------------- | ------------------------------------------- |
+| Color cue duration | 7 seconds                                 | 5 seconds                                   |
+| Number of colors   | 1 color                                   | 3 colors                                    |
+| Time pressure      | Not immediate                             | 5-second countdown shown on screen          |
+| Robot speed        | Slow, predictable             	         | Fast, pressure-inducing                     |
+| Cognitive load     | Low: simple visual memory, no time stress | High: memory + time pressure + selection    |
+| Interaction style  | Minimal, low engagement, more observation | Active, cognitively engaged with robot task |
+| Visual complexity  | Low                                       | Moderate (more distractors & decisions)     |
+
+
+REAL TIME TASK PARADIGM FLOW
+
+[Start Block (Ground Truth: LOW or HIGH)]
+        ↓
+[Real-Time EEG Acquisition Loop]
+        ↓
+[4s epoch → Processing → Feature Extraction → MWL Classification]
+        ↓
+[During First 2/3 of Block]
+        → Collect pre-adaptation predictions (Filling up the Majority Vote Buffer)
+        ↓
+[After 2/3 of Block]
+        → Evaluate Majority Vote Buffer → Choose Robot Adaptation Command:
+            - If MWL HIGH → Robot slows down & Amount of Battery selection simplifies
+            - If MWL LOW  → Robot speeds up & Amount of Battery Selection increases
+        ↓
+[Last 1/3 of Block]
+        → Robot behavior adapted (no further evaluation of MWL)
+        ↓
+[New Block Starts → Repeat Process]
