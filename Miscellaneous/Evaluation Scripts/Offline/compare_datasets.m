@@ -1,0 +1,123 @@
+%% Version 1
+
+filename = 'v1_Full_Final_Summary.xlsx';
+
+% Load Within-Dataset Accuracy
+within_data = readtable(filename, 'Sheet', 'Within_All');
+within_filtered = within_data(strcmp(within_data.Config, '25wCsp') & strcmp(within_data.Type, 'By_Config'), :);
+within_summary = groupsummary(within_filtered, 'Dataset', {'mean','std'}, 'Mean_Within');
+within_summary.Properties.VariableNames{'mean_Mean_Within'} = 'Mean_Within_Accuracy';
+within_summary.Properties.VariableNames{'std_Mean_Within'}  = 'Std_Within_Accuracy';
+
+% Load POST Cross Accuracy
+cross_data_post = readtable(filename, 'Sheet', 'Cross_All');
+cross_data_post = cross_data_post(strcmp(cross_data_post.Stage, 'Post') & strcmp(cross_data_post.Config, '25wCsp') & strcmp(cross_data_post.Model, 'STANDARD'), :);
+cross_data_post.SourceDataset = cellfun(@(s) strtok(s, ' '), cross_data_post.SOURCE, 'UniformOutput', false);
+cross_data_post.SOURCE = strtrim(string(cross_data_post.SOURCE));
+cross_data_post.TARGET = strtrim(string(cross_data_post.TARGET));
+invalid_pairs = (contains(cross_data_post.SOURCE, 'MATB_easy_diff') & contains(cross_data_post.TARGET, 'MATB_easy_meddiff')) | ...
+                (contains(cross_data_post.SOURCE, 'MATB_easy_meddiff') & contains(cross_data_post.TARGET, 'MATB_easy_diff'));
+cross_data_post = cross_data_post(~invalid_pairs, :);
+cross_summary_post = groupsummary(cross_data_post, 'SourceDataset', {'mean', 'std'}, 'ACCURACY');
+cross_summary_post.Properties.VariableNames{'SourceDataset'} = 'Dataset';
+cross_summary_post.Properties.VariableNames{'mean_ACCURACY'} = 'Mean_Cross_Accuracy';
+cross_summary_post.Properties.VariableNames{'std_ACCURACY'}  = 'Std_Cross_Accuracy';
+
+% Load PRE Cross Accuracy
+cross_data_pre = readtable(filename, 'Sheet', 'Cross_All');
+cross_data_pre = cross_data_pre(strcmp(cross_data_pre.Stage, 'Pre') & strcmp(cross_data_pre.Config, '25wCsp') & strcmp(cross_data_pre.Model, 'STANDARD'), :);
+cross_data_pre.SourceDataset = cellfun(@(s) strtok(s, ' '), cross_data_pre.SOURCE, 'UniformOutput', false);
+cross_data_pre.SOURCE = strtrim(string(cross_data_pre.SOURCE));
+cross_data_pre.TARGET = strtrim(string(cross_data_pre.TARGET));
+invalid_pairs = (contains(cross_data_pre.SOURCE, 'MATB_easy_diff') & contains(cross_data_pre.TARGET, 'MATB_easy_meddiff')) | ...
+                (contains(cross_data_pre.SOURCE, 'MATB_easy_meddiff') & contains(cross_data_pre.TARGET, 'MATB_easy_diff'));
+cross_data_pre = cross_data_pre(~invalid_pairs, :);
+cross_summary_pre = groupsummary(cross_data_pre, 'SourceDataset', {'mean','std'}, 'ACCURACY');
+cross_summary_pre.Properties.VariableNames{'SourceDataset'} = 'Dataset';
+cross_summary_pre.Properties.VariableNames{'mean_ACCURACY'} = 'Mean_Pre_Cross_Accuracy';
+cross_summary_pre.Properties.VariableNames{'std_ACCURACY'}  = 'Std_Pre_Cross_Accuracy';
+
+% Merge + Delta Computation
+result = outerjoin(within_summary(:,["Dataset","Mean_Within_Accuracy","Std_Within_Accuracy"]), cross_summary_post, 'Keys', 'Dataset', 'MergeKeys', true);
+result = outerjoin(result, cross_summary_pre, 'Keys', 'Dataset', 'MergeKeys', true);
+result.Delta_Cross_Accuracy = result.Mean_Cross_Accuracy - result.Mean_Pre_Cross_Accuracy;
+result.Std_Delta_Cross_Accuracy = sqrt(result.Std_Cross_Accuracy.^2 + result.Std_Pre_Cross_Accuracy.^2);
+
+% Final formatting
+result = result(:, {'Dataset', ...
+                    'Mean_Within_Accuracy', 'Std_Within_Accuracy', ...
+                    'Mean_Cross_Accuracy', 'Std_Cross_Accuracy', ...
+                    'Mean_Pre_Cross_Accuracy', 'Std_Pre_Cross_Accuracy', ...
+                    'Delta_Cross_Accuracy', 'Std_Delta_Cross_Accuracy'});
+result = sortrows(result, 'Mean_Cross_Accuracy', 'descend');
+
+disp('=== Dataset Summary (25wCsp, POST Calibration Only, STANDARD (finetuned)) ===');
+disp(result);
+
+figure;
+bar(categorical(result.Dataset), result.Mean_Cross_Accuracy); hold on;
+errorbar(categorical(result.Dataset), result.Mean_Cross_Accuracy, result.Std_Cross_Accuracy, ...
+    'k.', 'LineWidth', 1.5);
+ylabel('Mean Cross Accuracy (%)');
+title('Cross-Dataset Accuracy (25wCsp, After Calibration, STANDARD (finetuned))');
+grid on;
+
+
+%% Version 2
+
+filename = 'v2_Full_Final_Summary.xlsx';
+
+within_data = readtable(filename, 'Sheet', 'Within_All');
+within_filtered = within_data(strcmp(within_data.Config, '16wCsp') & strcmp(within_data.Type, 'By_Config'), :);
+within_summary = groupsummary(within_filtered, 'Dataset', {'mean','std'}, 'Mean_Within');
+within_summary.Properties.VariableNames{'mean_Mean_Within'} = 'Mean_Within_Accuracy';
+within_summary.Properties.VariableNames{'std_Mean_Within'}  = 'Std_Within_Accuracy';
+
+cross_data_post = readtable(filename, 'Sheet', 'Cross_All');
+cross_data_post = cross_data_post(strcmp(cross_data_post.Stage, 'Post') & strcmp(cross_data_post.Config, '16wCsp') & strcmp(cross_data_post.Model, 'HYPER'), :);
+cross_data_post.SourceDataset = cellfun(@(s) strtok(s, ' '), cross_data_post.SOURCE, 'UniformOutput', false);
+cross_data_post.SOURCE = strtrim(string(cross_data_post.SOURCE));
+cross_data_post.TARGET = strtrim(string(cross_data_post.TARGET));
+invalid_pairs = (contains(cross_data_post.SOURCE, 'MATB_easy_diff') & contains(cross_data_post.TARGET, 'MATB_easy_meddiff')) | ...
+                (contains(cross_data_post.SOURCE, 'MATB_easy_meddiff') & contains(cross_data_post.TARGET, 'MATB_easy_diff'));
+cross_data_post = cross_data_post(~invalid_pairs, :);
+cross_summary_post = groupsummary(cross_data_post, 'SourceDataset', {'mean', 'std'}, 'ACCURACY');
+cross_summary_post.Properties.VariableNames{'SourceDataset'} = 'Dataset';
+cross_summary_post.Properties.VariableNames{'mean_ACCURACY'} = 'Mean_Cross_Accuracy';
+cross_summary_post.Properties.VariableNames{'std_ACCURACY'}  = 'Std_Cross_Accuracy';
+
+cross_data_pre = readtable(filename, 'Sheet', 'Cross_All');
+cross_data_pre = cross_data_pre(strcmp(cross_data_pre.Stage, 'Pre') & strcmp(cross_data_pre.Config, '16wCsp') & strcmp(cross_data_pre.Model, 'HYPER'), :);
+cross_data_pre.SourceDataset = cellfun(@(s) strtok(s, ' '), cross_data_pre.SOURCE, 'UniformOutput', false);
+cross_data_pre.SOURCE = strtrim(string(cross_data_pre.SOURCE));
+cross_data_pre.TARGET = strtrim(string(cross_data_pre.TARGET));
+invalid_pairs = (contains(cross_data_pre.SOURCE, 'MATB_easy_diff') & contains(cross_data_pre.TARGET, 'MATB_easy_meddiff')) | ...
+                (contains(cross_data_pre.SOURCE, 'MATB_easy_meddiff') & contains(cross_data_pre.TARGET, 'MATB_easy_diff'));
+cross_data_pre = cross_data_pre(~invalid_pairs, :);
+cross_summary_pre = groupsummary(cross_data_pre, 'SourceDataset', {'mean','std'}, 'ACCURACY');
+cross_summary_pre.Properties.VariableNames{'SourceDataset'} = 'Dataset';
+cross_summary_pre.Properties.VariableNames{'mean_ACCURACY'} = 'Mean_Pre_Cross_Accuracy';
+cross_summary_pre.Properties.VariableNames{'std_ACCURACY'}  = 'Std_Pre_Cross_Accuracy';
+
+result = outerjoin(within_summary(:,["Dataset","Mean_Within_Accuracy","Std_Within_Accuracy"]), cross_summary_post, 'Keys', 'Dataset', 'MergeKeys', true);
+result = outerjoin(result, cross_summary_pre, 'Keys', 'Dataset', 'MergeKeys', true);
+result.Delta_Cross_Accuracy = result.Mean_Cross_Accuracy - result.Mean_Pre_Cross_Accuracy;
+result.Std_Delta_Cross_Accuracy = sqrt(result.Std_Cross_Accuracy.^2 + result.Std_Pre_Cross_Accuracy.^2);
+
+result = result(:, {'Dataset', ...
+                    'Mean_Within_Accuracy', 'Std_Within_Accuracy', ...
+                    'Mean_Cross_Accuracy', 'Std_Cross_Accuracy', ...
+                    'Mean_Pre_Cross_Accuracy', 'Std_Pre_Cross_Accuracy', ...
+                    'Delta_Cross_Accuracy', 'Std_Delta_Cross_Accuracy'});
+result = sortrows(result, 'Mean_Cross_Accuracy', 'descend');
+
+disp('=== Dataset Summary (14wCsp, POST Calibration Only, HYPER (finetuned)) ===');
+disp(result);
+
+figure;
+bar(categorical(result.Dataset), result.Mean_Cross_Accuracy); hold on;
+errorbar(categorical(result.Dataset), result.Mean_Cross_Accuracy, result.Std_Cross_Accuracy, ...
+    'k.', 'LineWidth', 1.5);
+ylabel('Mean Cross Accuracy (%)');
+title('Cross-Dataset Accuracy (16wCsp, After Calibration, HYPER (finetuned))');
+grid on;

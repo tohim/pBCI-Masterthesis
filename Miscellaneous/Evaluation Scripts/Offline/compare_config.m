@@ -1,0 +1,98 @@
+%% Version 1 — Compare Feature Configs (HYPER model, 30% Calib, finetuned)
+
+filename = 'v1_Full_Final_Summary.xlsx';
+cross_data = readtable(filename, 'Sheet', 'Cross_All');
+
+% Clean and normalize relevant columns
+cross_data.Model = upper(strtrim(string(cross_data.Model)));
+cross_data.Config = lower(strtrim(string(cross_data.Config)));
+cross_data.CalibrationType = lower(strtrim(string(cross_data.CalibrationType)));
+
+% Define configs to compare (match actual values in the sheet)
+configs = {'25', 'csp', '25wcsp'};
+
+% Pre-filter base data
+base_filtered = cross_data( ...
+    strcmp(cross_data.Stage, 'Post') & ...
+    cross_data.CalibPercent == 30, :);
+
+% Initialize result table
+summary_table = table();
+
+% Loop through configs
+for i = 1:length(configs)
+    cfg = configs{i};
+    filtered = base_filtered(strcmp(base_filtered.Config, cfg), :);
+
+    mean_acc = mean(filtered.ACCURACY);
+    std_acc  = std(filtered.ACCURACY);
+    n = height(filtered);
+
+    % Append row
+    summary_table = [summary_table; {cfg, mean_acc, std_acc, n}];
+end
+
+% Assign column names
+summary_table.Properties.VariableNames = ...
+    {'Feature_Config', 'Mean_Cross_Accuracy', 'Std_Cross_Accuracy', 'N'};
+
+% Sort by descending accuracy
+summary_table = sortrows(summary_table, 'Mean_Cross_Accuracy', 'descend');
+
+% Display
+disp('=== Feature Config Summary (30% Calibration) ===');
+disp(summary_table);
+
+
+
+
+%% Version 2 — Compare Feature Configs (HYPER model, 30% Calib, finetuned)
+
+filename = 'v2_Full_Final_Summary.xlsx';
+cross_data = readtable(filename, 'Sheet', 'Cross_All');
+
+% Clean and normalize relevant columns
+cross_data.Model = upper(strtrim(string(cross_data.Model)));
+cross_data.Config = lower(strtrim(string(cross_data.Config)));
+cross_data.CalibrationType = lower(strtrim(string(cross_data.CalibrationType)));
+
+% Define configs to compare (match actual values in the sheet)
+configs = {'16', 'csp', '16wcsp'};
+
+% Pre-filter base data
+base_filtered = cross_data( ...
+    strcmp(cross_data.Stage, 'Post') & ...
+    cross_data.CalibPercent == 30 & ...
+    strcmp(cross_data.CalibrationType, 'finetuned') & ...
+    strcmp(cross_data.Model, 'HYPER'), :);
+
+% Initialize result table
+summary_table = table();
+
+% Loop through configs
+for i = 1:length(configs)
+    cfg = configs{i};
+    filtered = base_filtered(strcmp(base_filtered.Config, cfg), :);
+
+    mean_acc = mean(filtered.ACCURACY);
+    std_acc  = std(filtered.ACCURACY);
+    n = height(filtered);
+
+    % Append row
+    summary_table = [summary_table; {cfg, mean_acc, std_acc, n}];
+end
+
+% Assign column names
+summary_table.Properties.VariableNames = ...
+    {'Feature_Config', 'Mean_Cross_Accuracy', 'Std_Cross_Accuracy', 'N'};
+
+% Sort by descending accuracy
+summary_table = sortrows(summary_table, 'Mean_Cross_Accuracy', 'descend');
+
+% Display
+disp('=== Feature Config Summary (HYPER Model, 30% Calibration, Finetuned) ===');
+disp(summary_table);
+
+
+
+
