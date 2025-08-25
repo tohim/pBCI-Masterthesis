@@ -1,0 +1,41 @@
+SETUP CHECK
+
+CHANGE BACK ROBOT IP! 
+CHANGE SUBJECT NUMBER!
+
+SIGN CONSENT BEFORE EXPERIMENT START. (when preparing, before putting cap is good time)
+
+Shut down multiplugs.
+
+Impedance Checks between Calib and Exp.
+
+SETUP:
+	◦	Start Simulink Laptop and Simulink File
+	◦	Montage and Connect EEG device
+	◦	Impedance Check
+	◦	Start Matlab TCP server for Simulink stream
+	◦	Run Simulink to connect
+	◦	Change robot IP .29. -> .0.
+	◦	Run Python Script with TCP Listener
+	◦	Connect Matlab to Python
+	◦	Run Calibration. Stop Stream. Check Impedances. Reconnect Stream. Run experiment. Stop Stream. Check Impedances again.
+
+FINISHED:
+	◦	If robot has box when run is finished-> Run until no box (e.g., run command high) -> then run return home
+	◦	Stop all streaming
+	◦	Shut down EEG device
+	◦	CHANGE ROBOT IP BACK -> .29.
+	◦	Shut down Robot
+	◦	Charge EEG device
+	◦	Sort Subject Files into Folder -> make note to increase subject number for next experiment.
+
+
+INSTRUCTIONS:
+	◦	Left / Right handed? 
+	◦	Explain Conditions (3vs1, time, robot behavior) 
+	◦	Explain Task (empty, refill, from left to right, if robot is working there, skip it)
+	◦	If 2 sec left -> memorize colors and finish task. (very important - never idle!)
+    	◦   Put boxes within green borders (for robot to not get damage when picking up)
+	◦	In experiment: When Adapt Screen -> stop what u do and start with new one
+	◦	Ofc try to be fast, but more important: Try to reduce fast movements/ Not move too much with head (important for EEG)
+	◦	Recommend to store batteries sorted -> easier to find 
