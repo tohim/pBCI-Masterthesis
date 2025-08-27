@@ -1,6 +1,6 @@
 %% Offline Processing Pipeline for pBCI Classification
 
-% Automated Offline Data Loading, Segmenting, pBCI Preprocessing, Feature
+% Automated Offline Data Loading, Preprocessing, Feature
 % Extraction and Model Training and Evaluation (Source & Target pre Calibration)
 
 % Automated Calibration Phase including Adapted, Finetuned and
@@ -19,9 +19,9 @@
 % 'proc3wRef'  -> Processed with DC Offset Removal, 2 to 20 Hz Butterworth 2nd order, MAD Artifact Removal, Average Referenced
 % 'proc3noRef' -> Processed with DC Offset Removal, 2 to 20 Hz Butterworth 2nd order, MAD Artifact Removal, NO Average Referenced
 % 'proc4' -> 2 to 20 Hz Butterworth 2nd order, MAD Artifact Removal, Average Referenced
-% (FINAL VERSION)'proc5' -> 2 to 20 Hz Butterworth 2nd oder, EXTENDED MAD Artifact Removal
+% 'proc5' -> 2 to 20 Hz Butterworth 2nd oder, EXTENDED MAD Artifact Removal (!FINAL VERSION!)
 % Dataset Name: 'STEW', 'HEATCHAIR', 'MATB' (easy_diff | easy_med_diff)
-% Type: 'epochs' | '(sampled_)labels' | 'train/val/test_features' | 'model' | 'norm_model' (for normalized Models)
+% Data Type: 'epochs' | '(sampled_)labels' | 'train/val/test_features' | 'model' | 'norm_model' (for normalized Models)
 % 'finetuned' (for Models with Transfer Learning) | 'finetuned_adapted' (for Models with Transfer Learning + Domain Adaptation Data)
 
 
@@ -691,4 +691,5 @@ fprintf('\n============================================\n')
 disp('[DONE] Calibration Phase Completed.');
 fprintf('\n============================================\n')
 fprintf('============================================\n')
+
 disp('[✓] Total Pipeline Complete.');
