@@ -57,6 +57,7 @@ Keywords: passive Brain-Computer Interface (pBCI), electroencephalography (EEG),
   > Both the Calibration and pre-adapt Experiment Data can be used for subsequent research on binary (low/high) MWL states.
   
    <br>
+   <br>
 
   **Real-Time Data stored in the Releases/ Tags**:
    
@@ -65,6 +66,7 @@ Keywords: passive Brain-Computer Interface (pBCI), electroencephalography (EEG),
   - RT_Base_Models: Contains the 3 Base Models used for the MWL Classification in the Experiment + the respective dataset-specific CSP filters. The 3 Base Models are also found in the code-folder "Real Time" -> "BaseModels"
   - RT_Calibrated_Models: Contains all subject-specific calibrated models (Base models finetuned/ retrained on the RT_Calibration_Data) + the same dataset-specific CSP filters as for the Base Models (CSP filters do not get retrained)
 
+  <br>
   <br>
   
   **How to access the RT Data**:
@@ -75,6 +77,7 @@ Keywords: passive Brain-Computer Interface (pBCI), electroencephalography (EEG),
     - a struct array is a Matlab data container allowing to save whole matrices (e.g., the channels x samples EEG data, in row x column format) within a "Field" of the struct
     - to access the respective EEG data matrix, target the respective field (struct.field(position); e.g., experiment_log.processed(5) -> gives the processed EEG matrix for field/ struct-row number 5)
         
+  <br>
   <br>
   
   **Naming Convention/ Data Structure**:
@@ -98,7 +101,6 @@ Keywords: passive Brain-Computer Interface (pBCI), electroencephalography (EEG),
   Only the LAST 600 epochs stored within the Calibration Logs are relevant data. Select accordingly when working with the data. All data before are recordings from familiarization periods in the
   beginning of each trial. These were performed to allow each subject to gain some initial experience with the paradigm, task and specifically working together with the robot. 
 
-  <br>
   <br>
   <br>
 
@@ -184,7 +186,7 @@ pre_adapt_features_STEW = cell2mat({experiment_log(pred_idxs).STEW_features}');
     
 <br> 
 
-  - Additional Columns of the respective structs: General Measurement and Paradigm Information
+  - **Additional Columns of the respective structs: General Measurement and Paradigm Information**
              
     - Calibration_Log:
       
