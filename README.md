@@ -5,7 +5,7 @@
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-## Abstract:
+## Abstract
 This thesis designs and evaluates a passive Brain-Computer Interface (pBCI) for monitoring mental workload (MWL) in a factory-like human–robot setting, by triggering adaptive automation (AA) to improve neuroergonomic 
 outcomes. A 14-channel EEG pipeline streams, preprocesses, and extracts multi-domain features (band-power/ratios, coherence, hjorth, entropy, CSP). Support vector machines (SVMs) trained on public MWL datasets are 
 calibrated per subject and combined with majority-vote smoothing. The end-to-end latency is < 2 seconds per epoch, enabling real-time operation. Offline, within-dataset classification achieves ~80% accuracy (best single model 84.67%), 
@@ -22,7 +22,7 @@ Keywords: passive Brain-Computer Interface (pBCI), electroencephalography (EEG),
 <br>
 
 
-## Repository Structure:
+## Repository Structure
 
 
 1. **Data**
