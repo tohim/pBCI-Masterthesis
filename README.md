@@ -323,7 +323,7 @@ pre_adapt_features_STEW = cell2mat({experiment_log(pred_idxs).STEW_features}');
 
    <br>
    
-**Real-Time Code**:
+### Real-Time Code:
 
 
   Code-folder containing all necessary scripts, functions, Simulink model, data (models, CSP filters) and information (Paradigm.txt, Setup_Check.txt) to perform real-time measurement.
@@ -346,7 +346,7 @@ pre_adapt_features_STEW = cell2mat({experiment_log(pred_idxs).STEW_features}');
    <br>
    <br>
   
-**Offline Code**:
+### Offline Code:
 
 
   Code-folder containing all necessary scripts, functions, data (labels, features, models) and information (comments in the code) to perform offline analysis of the public MWL datasets, respective features, models and the calibration phase + respective statistical analysis.
@@ -365,7 +365,7 @@ pre_adapt_features_STEW = cell2mat({experiment_log(pred_idxs).STEW_features}');
    <br>
    <br>
   
-**Miscellaneous Code**:
+### Miscellaneous Code:
 
 
    - Code-folder containing parts of the scripts and functions to perform post-analysis or summaries of the offline results and real-time experiment results (evaluation across all subjects: signal quality, feature statistics and importance, model performances, NASA-TLX answers, etc.).
