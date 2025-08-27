@@ -1,23 +1,8 @@
-%% Data Structure
+%% LEGACY MANUAL OFFLINE PIPELINE (for reference)
 
-% Hyperparameter Tuned = hyper (includes best_C and best_kernel)
-% Amount of Features: 'allCH'(all Channels); '27'; '23' || 'csp_4' (CSP with 4 filters / 2perClass) ;
-%  '24wCsp' (Standard 24 Features + CSP Features)
-% Epoch Time: '2sec'; '4sec'; 
-% Raw Data: 'raw'
-% Processed Data: 'processed'
-% Processed from Download: 'rawproc' / 'raw'
-% Processed with Average Reference; 1 to 40 Hz Butterworth 2nd order: 'proc1'
-% Processed with Average Reference; 1 to 40 Hz Butterworth 2nd order; ASR Filtered: 'proc1ASR'
-% Processed with Average Reference; 2 to 40 Hz Butterworth 2nd order; ASR Filtered: 'proc12ASR'
-% Processed with Average Reference; 2 to 25 Hz Butterworth 2nd order: 'proc2'
-% Processed with Average Reference; 2 to 25 Hz Butterworth 2nd order; ASR Filtered: 'proc2ASR'
-% Processed with DC Offset Removal; 2 to 20 Hz Butterworth 2nd order; Selfwritten Artifact Removal; Average Referenced: 'proc3wRef;
-% Processed with DC Offset Removal; 2 to 20 Hz Butterworth 2nd order; Selfwritten Artifact Removal; NO Average Referenced: 'proc3noRef;
-% Dataset Name: 'STEW'; 'HEATCHAIR'; 'MATB' (easy_diff || easy_med_diff)
-% Data Object Definition: 'epochs'; 'labels'; 'train/val/test_features'; 'model'; 'norm_model' (for normalized Models);
-% 'finetuned' (for Transfer Learning Models); 'finetuned_adapted' (for Transfer Learning with Domain Adaptation Data)
-
+% Kept in the Offline Code Folder bc the data preprocessing can be done here manually for each dataset
+% Then later in the main and up to date "OFF_pipeline" the already preprocessed data is loaded, to avoid heavy
+% preprocessing time when executing the main automation script 
 
 %% Manual Offline Pipeline
 % 
@@ -178,5 +163,6 @@ legacy_cross_dataset_eval(opts);
 % Run Single Calibration 
 % -------------------------------------------------------------------------
 % run_calibration(params);
+
 
 
