@@ -298,23 +298,23 @@ pre_adapt_features_STEW = cell2mat({experiment_log(pred_idxs).STEW_features}');
        - Offline Calibrated Models: selected Base Models calibrated w other Base Model data, e.g. (STEW calibrated with HEAT) - only the 1000 (base/within model) samples x 30% (cross data) calibration samples
          Calibrated Models are uploaded (this combination was the preferred choice in the following RT-experiment of this study, per request all other models could be made available via some other cloud storage)
           
-       - Naming Convention: "modelType _ #trainingSamples _ featureConfiguration _ 4sec _ preprocessingType _ datasetName _ calibrationType _ wCross _ crossDataset"
+          - Naming Convention: "modelType _ #trainingSamples _ featureConfiguration _ 4sec _ preprocessingType _ datasetName _ calibrationType _ wCross _ crossDataset"
          
-         - *modelType* = standard, hyper, norm, hypernorm
+            - *modelType* = standard, hyper, norm, hypernorm
            
-         - *trainingSamples* = 1000, 2000, 3000, 4000
+            - *trainingSamples* = 1000, 2000, 3000, 4000
            
-         - *featureConfiguration* = 25 (BASE-only), csp (CSP-only), 25wCsp (BASE+CSP)
+            - *featureConfiguration* = 25 (BASE-only), csp (CSP-only), 25wCsp (BASE+CSP)
            
-         - *processingType* = raw, proc5;
+            - *processingType* = raw, proc5;
            
-         - *datasetName* = STEW, HEAT, MATB_easy_diff, MATB_easy_meddiff
+            - *datasetName* = STEW, HEAT, MATB_easy_diff, MATB_easy_meddiff
            
-         - *calibrationType* = adapted_norm, finetuned, finetuned_adapted_norm
+            - *calibrationType* = adapted_norm, finetuned, finetuned_adapted_norm
            
-         - *crossDataset* = STEW, HEAT, MATB_easy_diff, MATB_easy_meddiff
+            - *crossDataset* = STEW, HEAT, MATB_easy_diff, MATB_easy_meddiff
            
-         - For more detailed explanation of the meaning of each part of the naming, check the "OFF_pipeline.mat" "File Naming Convention" at the top of the script
+            - For more detailed explanation of the meaning of each part of the naming, check the "OFF_pipeline.mat" "File Naming Convention" at the top of the script
 
 <br>
 
