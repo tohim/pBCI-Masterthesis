@@ -1,4 +1,4 @@
-## Real-Time and Online pBCI Mental Workload Monitoring with Adaptive Automation Study - Code and Data Repository
+## Real-Time and Online passive Brain-Computer Interface Mental Workload Monitoring with Adaptive Automation - Code and Data Repository
 
 
 <br>
@@ -27,16 +27,20 @@ Keywords: passive Brain-Computer Interface (pBCI), electroencephalography (EEG),
 
 1. **Data**
    
-   - The Offline and Real-Time Experiment Data is available in the Releases (Tags) - next to the "Branch" icon on the Code/Repository page -> "Tags".
-   - Select "Releases" for Information on Data. Select "Tags" and "Downloads" to download the data.
+   - The Offline and Real-Time Calibration and Experiment Data is available in the "Releases": https://github.com/tohim/pBCI-Masterthesis/releases
+   - Select a Data Release, open "Assets", download the .zip file that contains all the respective data.
 
 2. **Code**  
    - Code-folders containing the respective scripts, functions, data, etc. for:
    - Real-Time Code, Offline Code and Miscellaneous Code
+  
+3. **Citation**
 
    <br>
    <br>
    <br>
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------   
 
 ## 1. Data
 
@@ -60,7 +64,7 @@ Keywords: passive Brain-Computer Interface (pBCI), electroencephalography (EEG),
    <br>
    <br>
 
-  **Real-Time Data stored in the Releases/ Tags**:
+  **Real-Time Data stored in the Releases**:
    
   - RT_Experiment_Data: Real-Time Experiment Data recorded in this study (contains measurement information and all results)
   - RT_Calibration_Data: Real-Time Calibration Data recorded in this study (contains measurement information and all results)
@@ -72,7 +76,7 @@ Keywords: passive Brain-Computer Interface (pBCI), electroencephalography (EEG),
   
   **How to access the RT Data**:
        
-  - Download the subject-specific .mat files from both the RT_Calibration_Data & the RT_Experiment_Data. (contains the 4-second EEG epochs, together with additional metrics and information of each trial)
+  - Download the .zip files, extract the zip, access the subject-specific .mat files from both the RT_Calibration_Data & the RT_Experiment_Data. (contains the 4-second EEG epochs, together with additional metrics and information of each trial)
   - Within RT_Calibration_Data & RT_Experiment_Data: .mat files with the measurement logs/data + .txt summary containing extra measurement information for each subject and respective phase
   - Both the calibration_log.mat (saved in the Subject*_CalibrationLog.mat file) and the experiment_log.mat (saved in the Subject*_Results.mat file) are "structs":
     - a struct array is a Matlab data container allowing to save whole matrices (e.g., the channels x samples EEG data, in row x column format) within a "Field" of the struct
@@ -257,8 +261,9 @@ pre_adapt_features_STEW = cell2mat({experiment_log(pred_idxs).STEW_features}');
 
      **Thesis Offline Data**:
 
-     To access and download the stored Offline Data, again check the Releases/ Tags for the respective "Offline_*" Tags and Release information:
-      <br>
+     **To access and download the stored Offline Data, again check the Releases for the respective "Offline_*" Tags:**
+    <br>
+    <br>
 
      - Offline_*datasetname*: Offline Segmented, Labeled, Processed STEW/ MATB Easy-Diff/ MATB Easy-MedDiff/ HEAT Data (contains the respective 4-second epoch labels and segmented raw & processed data of each public MWL dataset)
 
@@ -274,47 +279,51 @@ pre_adapt_features_STEW = cell2mat({experiment_log(pred_idxs).STEW_features}');
          - For more detailed explanation of the meaning of each part of the naming, check the "OFF_pipeline.mat" "File Naming Convention" at the top of the script
          
      <br>
+     <br>
      
-     - Offline_Features&Models: Offline Data of both the pre- and post-calibration "OFF_pipeline" script.
-   
-       - Base Models: total amount (3) of Base Models  trained and evaluated in this study.
+     - Offline_Features&Models: Offline Data of both the pre- and post-calibration "OFF_pipeline" script. The "Offline_Data.zip" is available, containing all the respective offline data.
+    
+         AutoPipeline Folder:
+    
+          - Total amount of Base Models trained and evaluated in this study.
          
-       - Naming Convention: "#trainingSamples _ featureConfiguration _ 4sec _ preprocessingType _ datasetName _ modelType"
+             - Naming Convention: "#trainingSamples _ featureConfiguration _ 4sec _ preprocessingType _ datasetName _ modelType"
        
-         - *trainingSamples* = 1000, 2000, 3000, 4000
+               - *trainingSamples* = 1000, 2000, 3000, 4000
            
-         - *featureConfiguration* = 25 (BASE-only), csp (CSP-only), 25wCsp (BASE+CSP)
+               - *featureConfiguration* = 25 (BASE-only), csp (CSP-only), 25wCsp (BASE+CSP)
            
-         - *processingType* = raw, proc5
+               - *processingType* = proc5
            
-         - *datasetName* = STEW, HEAT, MATB_easy_diff, MATB_easy_meddiff
+               - *datasetName* = STEW, HEAT, MATB_easy_diff, MATB_easy_meddiff
            
-         - *modelType* = standard, hyper, norm, hypernorm
+               - *modelType* = standard, hyper, norm, hypernorm
            
-         - For more detailed explanation of the meaning of each part of the naming, check the "OFF_pipeline.mat" "File Naming Convention" at the top of the script
+               - For more detailed explanation of the meaning of each part of the naming, check the "OFF_pipeline.mat" "File Naming Convention" at the top of the script
+              
+               <br>
+               
+         AutoCalibration Folder:
         
-      <br>
-          
-       - Offline Calibrated Models: selected Base Models calibrated w other Base Model data, e.g. (STEW calibrated with HEAT) - only the 1000 (base/within model) samples x 30% (cross data) calibration samples
-         Calibrated Models are uploaded (this combination was the preferred choice in the following RT-experiment of this study, per request all other models could be made available via some other cloud storage)
-          
-          - Naming Convention: "modelType _ #trainingSamples _ featureConfiguration _ 4sec _ preprocessingType _ datasetName _ calibrationType _ wCross _ crossDataset"
+          - Offline Calibrated Models: selected Base Models calibrated w other Base Model data, e.g. (STEW calibrated with HEAT)
+            
+            - Naming Convention: "modelType _ #trainingSamples _ featureConfiguration _ 4sec _ preprocessingType _ datasetName _ calibrationType _ wCross _ crossDataset"
          
-            - *modelType* = standard, hyper, norm, hypernorm
+              - *modelType* = standard, hyper, norm, hypernorm
            
-            - *trainingSamples* = 1000, 2000, 3000, 4000
+              - *trainingSamples* = 1000, 2000, 3000, 4000
            
-            - *featureConfiguration* = 25 (BASE-only), csp (CSP-only), 25wCsp (BASE+CSP)
+              - *featureConfiguration* = 25 (BASE-only), csp (CSP-only), 25wCsp (BASE+CSP)
            
-            - *processingType* = raw, proc5;
+              - *processingType* = proc5;
            
-            - *datasetName* = STEW, HEAT, MATB_easy_diff, MATB_easy_meddiff
+              - *datasetName* = STEW, HEAT, MATB_easy_diff, MATB_easy_meddiff
            
-            - *calibrationType* = adapted_norm, finetuned, finetuned_adapted_norm
+              - *calibrationType* = adapted_norm, finetuned, finetuned_adapted_norm
            
-            - *crossDataset* = STEW, HEAT, MATB_easy_diff, MATB_easy_meddiff
+              - *crossDataset* = STEW, HEAT, MATB_easy_diff, MATB_easy_meddiff
            
-            - For more detailed explanation of the meaning of each part of the naming, check the "OFF_pipeline.mat" "File Naming Convention" at the top of the script
+              - For more detailed explanation of the meaning of each part of the naming, check the "OFF_pipeline.mat" "File Naming Convention" at the top of the script
 
 <br>
 
@@ -371,10 +380,21 @@ pre_adapt_features_STEW = cell2mat({experiment_log(pred_idxs).STEW_features}');
 ### Miscellaneous Code:
 
 
-   - Code-folder containing parts of the scripts and functions to perform post-analysis or summaries of the offline results and real-time experiment results (evaluation across all subjects: signal quality, feature statistics and importance, model performances, NASA-TLX answers, etc.).
+Code-folder containing parts of the scripts and functions to perform post-analysis or summaries of the offline results and real-time experiment results (evaluation across all subjects: signal quality, feature statistics and importance, model performances, NASA-TLX answers, etc.). Also contains old legacy scripts as reference for newer versions.
 
-   - Also contains old legacy scripts for reference of new versions.
-
-      - Evaluation Scripts: Scripts used to for offline and experiment data evaluations
+   - Evaluation Scripts: Scripts used to for offline and experiment data evaluations
       
-      - Legacy Functions: Old functions, not used anywhere anymore, included for reference
+   - Legacy Functions: Old functions, not used anywhere anymore, included for reference
+    
+<br>
+<br>
+<br>
+<br>
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## 3. Citation
+
+
+T. Himmelstoß, “Implementation and Assessment of a Real-Time Passive Brain–Computer Interface for Neuroadaptive Automation in Factory-like Settings”,
+M.Sc. Thesis, Systems Neuroscience & Neurotechnology Unit, Faculty of Engineering, Saarland Univ. of Applied Sciences (htw saar), Saarbrücken, Germany, 2025.
