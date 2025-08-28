@@ -5,7 +5,7 @@
 % -------------------------------------------------------------------------
 
 
-%% Structure
+%% Structure hui?
 
 % I.  Calibration Phase    (Collect User-specific Data & Train Final Subject-Adapted Model using Transfer Learning)
 % II. Real-Time Experiment (Predict Mental Workload and adapt System and Robot Behavior accordingly)
@@ -1221,4 +1221,5 @@ fclose(fid);
 
 fprintf('\n__________________________________\n');
 fprintf('\n[DONE] Finished Experiment.\n\n');
+
 
