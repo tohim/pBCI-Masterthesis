@@ -115,7 +115,7 @@ Keywords: passive Brain-Computer Interface (pBCI), electroencephalography (EEG),
   > For experiment data, use **pre-ADAPT** epochs for clear ground truth: **first 19 epochs** of each block (total **190/300** epochs).
       <br>
 
-  Only the FIRST 19 epochs of each ground truth block are PRE-ADAPT epochs. Filtering for pre-adapt epochs, results a total of 190/300 epochs stored within the Experiment Log of each subject.
+  Only the FIRST 19 epochs of each ground truth block are PRE-ADAPT epochs. Filtering for pre-adapt epochs results a total of 190/300 epochs stored within the Experiment Log of each subject.
   Afterwards (after 19/30 epochs per block), the "Adaptive Automation" (AA) occurs, the MWL state of the subject changes and no clear binary MWL classification is given anymore. 
   It is necessary to sort the Experiment Log data for pre-adapt epochs, if clear binary 0=low/ 1=high data is wanted. This can be done be utilizing the logged "adapted_epochs" in the experiment_log struct.
         
@@ -305,7 +305,7 @@ pre_adapt_features_STEW = cell2mat({experiment_log(pred_idxs).STEW_features}');
                
          AutoCalibration Folder:
         
-          - Offline Calibrated Models: selected Base Models calibrated w other Base Model data, e.g. (STEW calibrated with HEAT)
+          - Offline Calibrated Models: selected Base Models calibrated w other Base Model data (e.g., STEW calibrated with HEAT)
             
             - Naming Convention: "modelType _ #trainingSamples _ featureConfiguration _ 4sec _ preprocessingType _ datasetName _ calibrationType _ wCross _ crossDataset"
          
